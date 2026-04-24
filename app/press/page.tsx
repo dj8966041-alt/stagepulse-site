@@ -60,7 +60,8 @@ export default function PressPage() {
               </div>
               <div className="space-y-4 text-barricade-secondary text-base leading-relaxed">
                 <p>
-                  StagePulse is fully independent. We do not accept advertising, sponsored content, or any financial arrangements that affect editorial decisions. Press passes and credentials are never exchanged for guaranteed positive coverage — we cover what we think is worth covering, and we write what we actually experienced.
+                  StagePulse is fully independent. Coverage decisions are based entirely on what we think is worth
+                  covering — no outside influence, no exceptions. We cover what matters.
                 </p>
                 <p>
                   Our reviews are honest assessments of live performances. We don't write puff pieces. If a show was exceptional, you'll know from reading us. If something didn't land, we'll say that too, with respect for the work that went into it.
@@ -85,8 +86,8 @@ export default function PressPage() {
                 </p>
                 <p>
                   To request press or photo credentials, contact us at{' '}
-                  <a href="mailto:dj8966041@gmail.com" className="text-barricade-text hover:text-barricade-red transition-colors underline underline-offset-2">
-                    dj8966041@gmail.com
+                  <a href="mailto:stagepulselive@gmail.com" className="text-barricade-text hover:text-barricade-red transition-colors underline underline-offset-2">
+                    stagepulselive@gmail.com
                   </a>{' '}
                   with the show name, date, venue, and any relevant details. We respond to all credential requests within 48 hours.
                 </p>
@@ -113,8 +114,8 @@ export default function PressPage() {
                 </p>
                 <p>
                   Photographers: we review portfolios and work on a show-by-show basis. If you have strong low-light concert photography experience and want to contribute gallery work, send a link to your portfolio and a brief note about your approach to{' '}
-                  <a href="mailto:dj8966041@gmail.com" className="text-barricade-text hover:text-barricade-red transition-colors underline underline-offset-2">
-                    dj8966041@gmail.com
+                  <a href="mailto:stagepulselive@gmail.com" className="text-barricade-text hover:text-barricade-red transition-colors underline underline-offset-2">
+                    stagepulselive@gmail.com
                   </a>.
                 </p>
               </div>
@@ -132,8 +133,8 @@ export default function PressPage() {
                 <div className="space-y-5">
                   <div>
                     <p className="text-xs tracking-widest uppercase text-barricade-muted mb-1.5">Email</p>
-                    <a href="mailto:dj8966041@gmail.com" className="text-barricade-text hover:text-barricade-red transition-colors">
-                      dj8966041@gmail.com
+                    <a href="mailto:stagepulselive@gmail.com" className="text-barricade-text hover:text-barricade-red transition-colors">
+                      stagepulselive@gmail.com
                     </a>
                   </div>
                   <div>

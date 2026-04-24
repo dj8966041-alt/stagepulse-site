@@ -3,18 +3,52 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 
+const INQUIRY_LABELS: Record<string, string> = {
+  press: 'Press pass / photo credential request',
+  pitch: 'Story or album pitch',
+  photography: 'Photographer submission',
+  show: 'Show tip / upcoming event',
+  general: 'General inquiry',
+  other: 'Other',
+}
+
 export default function ContactPage() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+    setSubmitError(null)
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
   }
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
+    setSubmitError(null)
     setStatus('sending')
-    setTimeout(() => setStatus('sent'), 1400)
+    const topic = INQUIRY_LABELS[form.subject] ?? form.subject
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          subject: topic,
+          message: form.message,
+        }),
+      })
+      const data = (await res.json().catch(() => ({}))) as { error?: string }
+      if (!res.ok) {
+        setSubmitError(data.error ?? 'Something went wrong. Please try again or email us directly.')
+        setStatus('idle')
+        return
+      }
+      setStatus('sent')
+    } catch {
+      setSubmitError('Could not reach the server. Check your connection and try again.')
+      setStatus('idle')
+    }
   }
 
   return (
@@ -51,8 +85,8 @@ export default function ContactPage() {
               <div className="space-y-6">
                 <div className="pt-6 border-t border-barricade-border">
                   <p className="text-xs tracking-widest uppercase text-barricade-muted mb-2">Press & Media</p>
-                  <a href="mailto:dj8966041@gmail.com" className="text-barricade-text hover:text-barricade-red transition-colors text-sm">
-                    dj8966041@gmail.com
+                  <a href="mailto:stagepulselive@gmail.com" className="text-barricade-text hover:text-barricade-red transition-colors text-sm">
+                    stagepulselive@gmail.com
                   </a>
                   <p className="text-barricade-muted text-xs mt-1 leading-relaxed">
                     Photo pass requests, press credentials, interviews, and media inquiries.
@@ -61,8 +95,8 @@ export default function ContactPage() {
 
                 <div className="pt-6 border-t border-barricade-border">
                   <p className="text-xs tracking-widest uppercase text-barricade-muted mb-2">General & Pitches</p>
-                  <a href="mailto:dj8966041@gmail.com" className="text-barricade-text hover:text-barricade-red transition-colors text-sm">
-                    dj8966041@gmail.com
+                  <a href="mailto:stagepulselive@gmail.com" className="text-barricade-text hover:text-barricade-red transition-colors text-sm">
+                    stagepulselive@gmail.com
                   </a>
                   <p className="text-barricade-muted text-xs mt-1 leading-relaxed">
                     Story pitches, show tips, photographer submissions, general inquiries.
@@ -160,6 +194,12 @@ export default function ContactPage() {
                     <option value="other">Other</option>
                   </select>
                 </div>
+
+                {submitError && (
+                  <p className="text-sm text-barricade-red border border-barricade-red/40 bg-barricade-red/5 px-4 py-3">
+                    {submitError}
+                  </p>
+                )}
 
                 <div>
                   <label htmlFor="message" className="block text-xs tracking-widest uppercase text-barricade-muted mb-2">

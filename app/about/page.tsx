@@ -4,7 +4,8 @@ import PhotoPlaceholder from '@/components/PhotoPlaceholder'
 
 export const metadata: Metadata = {
   title: 'About',
-  description: 'StagePulse is an independent music publication based in San Antonio, TX, founded by Diego Jauregui.',
+  description:
+    'StagePulse is an independent music publication based in San Antonio, TX. Live music across every genre, every venue, every level.',
 }
 
 export default function AboutPage() {
@@ -34,7 +35,7 @@ export default function AboutPage() {
           <div className="lg:col-span-4 lg:sticky lg:top-24 lg:self-start">
             <div className="border-l-2 border-barricade-red pl-6">
               <blockquote className="font-display text-3xl md:text-4xl tracking-widest text-barricade-text leading-tight">
-                "WE LOVE SHOWS AND WE BELIEVE EVERY ARTIST DESERVES TO BE DOCUMENTED PROPERLY."
+                &ldquo;Every show ends. We make sure it leaves something behind.&rdquo;
               </blockquote>
             </div>
             <div className="mt-10 pt-8 border-t border-barricade-border">
@@ -60,38 +61,39 @@ export default function AboutPage() {
           <div className="lg:col-span-8">
             <div className="prose max-w-none">
               <p className="text-xl md:text-2xl text-barricade-text leading-loose mb-8 font-light">
-                StagePulse is an independent music publication based in San Antonio, TX. Founded by Diego Jauregui, StagePulse covers live music across all genres — from underground rap to indie rock to everything in between.
+                StagePulse is an independent music publication based in San Antonio, TX. We cover live music across
+                every genre, every venue, every level — from club shows to festival stages.
               </p>
 
               <p className="text-barricade-secondary text-base md:text-lg leading-loose mb-6">
-                We started this because we love shows and we believe every artist deserves to be documented properly. Too many performances happen and disappear — no photos, no review, no record that it ever took place. That's the gap StagePulse exists to fill.
+                We started this because someone had to. The moments happening at shows right now — the ones that will
+                matter later, the ones people will wish they had photos of — most of them disappear without a trace.
+                StagePulse is here before they do.
               </p>
 
               <p className="text-barricade-secondary text-base md:text-lg leading-loose mb-6">
-                San Antonio has always had a scene. Punk, metal, cumbia, hip-hop, country, jazz, indie, hardcore — generations of it. The music has always been here. The consistent documentation hasn't always been. That's what we're building.
+                San Antonio has always had a scene. Punk, metal, cumbia, hip-hop, country, jazz, indie, hardcore —
+                generations of it. The music has always been here. The documentation hasn&apos;t always kept up. That
+                changes now — and it doesn&apos;t stop at city limits.
+              </p>
+
+              <p className="text-barricade-secondary text-base md:text-lg leading-loose mb-6">
+                The approach is simple: get to the show, get close, and capture what&apos;s actually there. Not a
+                polished version of it. The real thing, in the light the stage gives us.
+              </p>
+
+              <p className="text-barricade-secondary text-base md:text-lg leading-loose mb-10">
+                This is for the artists on the rise and the ones already there. For the kids in the crowd who needed
+                proof something real happened. For anyone who&apos;s ever left a show wishing they could hold onto it
+                a little longer.
               </p>
 
               <div className="border-l-2 border-barricade-red pl-6 my-10">
                 <p className="text-barricade-text text-xl leading-relaxed italic">
-                  "We show up, we shoot, and we share."
+                  &ldquo;A pulse. Something you feel before you process it. That&apos;s what we&apos;re chasing at
+                  every show.&rdquo;
                 </p>
               </div>
-
-              <p className="text-barricade-secondary text-base md:text-lg leading-loose mb-6">
-                The approach is simple: get to the show, get as close as possible, and capture what's actually happening — not a polished version of it, not a PR-approved version. The real thing, as it is, in the light the stage gives us.
-              </p>
-
-              <p className="text-barricade-secondary text-base md:text-lg leading-loose mb-6">
-                StagePulse is fully independent. There are no advertisers, no label deals, no sponsored content. Coverage decisions are made based on what we think is worth covering — full stop. If a show was incredible, you'll read that here. If something didn't land, we'll be honest about that too.
-              </p>
-
-              <p className="text-barricade-secondary text-base md:text-lg leading-loose mb-6">
-                The name comes from what a live show actually does when it's working — it hits you somewhere physical. A pulse. Something you feel before you process it. That's what we're chasing at every show, and that's what we're trying to put on the page.
-              </p>
-
-              <p className="text-barricade-secondary text-base md:text-lg leading-loose">
-                If you're playing a show in San Antonio, or coming through, or doing something we should know about — reach out. We want to be there.
-              </p>
             </div>
 
             <div className="mt-12 pt-8 border-t border-barricade-border flex flex-wrap gap-4">

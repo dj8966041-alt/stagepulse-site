@@ -77,14 +77,14 @@ export default function Footer() {
             <div className="flex flex-col gap-3 text-sm text-barricade-secondary">
               <div>
                 <p className="text-barricade-muted text-xs uppercase tracking-widest mb-1">Press & Media</p>
-                <a href="mailto:dj8966041@gmail.com" className="hover:text-barricade-text transition-colors">
-                  dj8966041@gmail.com
+                <a href="mailto:stagepulselive@gmail.com" className="hover:text-barricade-text transition-colors">
+                  stagepulselive@gmail.com
                 </a>
               </div>
               <div>
                 <p className="text-barricade-muted text-xs uppercase tracking-widest mb-1">Pitches & General</p>
-                <a href="mailto:dj8966041@gmail.com" className="hover:text-barricade-text transition-colors">
-                  dj8966041@gmail.com
+                <a href="mailto:stagepulselive@gmail.com" className="hover:text-barricade-text transition-colors">
+                  stagepulselive@gmail.com
                 </a>
               </div>
             </div>

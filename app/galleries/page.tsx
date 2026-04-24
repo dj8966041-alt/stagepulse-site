@@ -78,8 +78,8 @@ export default function GalleriesPage() {
             </p>
             <p className="text-barricade-secondary leading-relaxed text-sm">
               Photographers interested in contributing work can reach out at{' '}
-              <a href="mailto:dj8966041@gmail.com" className="text-barricade-text hover:text-barricade-red transition-colors">
-                dj8966041@gmail.com
+              <a href="mailto:stagepulselive@gmail.com" className="text-barricade-text hover:text-barricade-red transition-colors">
+                stagepulselive@gmail.com
               </a>
               .
             </p>

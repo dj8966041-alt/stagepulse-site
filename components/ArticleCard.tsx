@@ -16,23 +16,24 @@ export default function ArticleCard({ article, variant = 'default' }: Props) {
             index={article.coverIndex}
             alt={article.title}
             aspectRatio="16/9"
-            className="transition-transform duration-700 group-hover:scale-[1.02]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
             <span className="inline-block text-xs tracking-widest uppercase text-barricade-red mb-3">
               {article.category}
             </span>
-            <h2 className="font-display text-3xl md:text-5xl tracking-wide text-white leading-tight mb-2 group-hover:text-barricade-red transition-colors duration-300">
+            <h2 className="font-display text-3xl md:text-5xl tracking-wide text-white leading-tight mb-2 group-hover:text-barricade-red transition-colors duration-200">
               {article.title}
             </h2>
-            <p className="text-barricade-secondary text-sm leading-relaxed hidden md:block line-clamp-2">
+            <p className="text-barricade-secondary text-sm leading-relaxed hidden md:block line-clamp-2 mb-4 max-w-2xl">
               {article.subtitle}
             </p>
-            <div className="flex items-center gap-4 mt-4">
+            <div className="flex items-center gap-3">
               <span className="text-xs text-barricade-muted uppercase tracking-widest">{article.author}</span>
               <span className="text-barricade-border">·</span>
               <span className="text-xs text-barricade-muted">{article.displayDate}</span>
+              <span className="text-barricade-border">·</span>
+              <span className="text-xs text-barricade-muted">{article.readTime}</span>
             </div>
           </div>
         </div>
@@ -48,7 +49,6 @@ export default function ArticleCard({ article, variant = 'default' }: Props) {
             index={article.coverIndex}
             alt={article.title}
             aspectRatio="4/3"
-            className="transition-transform duration-500 group-hover:scale-105"
           />
         </div>
         <div className="flex flex-col justify-center min-w-0">
@@ -62,31 +62,31 @@ export default function ArticleCard({ article, variant = 'default' }: Props) {
     )
   }
 
+  // default — cover image top, category, title, subtitle, author/date bottom
   return (
     <Link href={`/articles/${article.slug}`} className="group block">
-      <div className="overflow-hidden mb-4">
+      <div className="overflow-hidden mb-4 border border-barricade-border">
         <PhotoPlaceholder
           index={article.coverIndex}
           alt={article.title}
           aspectRatio="3/2"
-          className="transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>
       <span className="inline-block text-xs tracking-widest uppercase text-barricade-red mb-2">
         {article.category}
       </span>
-      <h3 className="font-display text-2xl md:text-3xl tracking-wide text-barricade-text group-hover:text-barricade-red transition-colors leading-tight mb-2">
+      <h3 className="font-display text-2xl md:text-3xl tracking-wide text-barricade-text group-hover:text-barricade-red transition-colors duration-200 leading-tight mb-2">
         {article.title}
       </h3>
-      <p className="text-barricade-secondary text-sm leading-relaxed line-clamp-2 mb-3">
+      <p className="text-barricade-secondary text-sm leading-relaxed line-clamp-2 mb-4">
         {article.subtitle}
       </p>
-      <div className="flex items-center gap-3">
-        <span className="text-xs text-barricade-muted uppercase tracking-widest">{article.author}</span>
+      <div className="flex items-center gap-3 text-xs text-barricade-muted uppercase tracking-widest">
+        <span>{article.author}</span>
         <span className="text-barricade-border">·</span>
-        <span className="text-xs text-barricade-muted">{article.displayDate}</span>
+        <span>{article.displayDate}</span>
         <span className="text-barricade-border">·</span>
-        <span className="text-xs text-barricade-muted">{article.readTime}</span>
+        <span>{article.readTime}</span>
       </div>
     </Link>
   )

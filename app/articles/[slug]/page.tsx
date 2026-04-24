@@ -65,16 +65,20 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
 
   return (
     <div className="bg-barricade-black min-h-screen">
-      {/* Hero */}
-      <div className="relative overflow-hidden" style={{ minHeight: '50vh' }}>
+      {/* Hero — min height + base layer so full-bleed header matches every article, even with fill-only placeholder */}
+      <div className="relative w-full min-h-[50vh] overflow-hidden">
+        <div
+          className="absolute inset-0 min-h-[50vh] bg-[#0a0a0a] pointer-events-none"
+          aria-hidden
+        />
         <PhotoPlaceholder
+          fill
           index={article.coverIndex}
-          className="absolute inset-0 w-full h-full"
-          aspectRatio="auto"
+          className="absolute inset-0 w-full h-full min-h-[50vh]"
           alt={article.title}
         />
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 min-h-[50vh] pointer-events-none"
           style={{ background: 'linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.6) 55%, rgba(10,10,10,0.15) 100%)' }}
         />
         <div className="relative z-10 max-w-screen-xl mx-auto px-5 md:px-8 pt-36 pb-14">

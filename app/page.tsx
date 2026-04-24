@@ -1,7 +1,11 @@
 import Link from 'next/link'
 import PhotoPlaceholder from '@/components/PhotoPlaceholder'
+import ArticleCard from '@/components/ArticleCard'
+import { articles } from '@/lib/data'
 
 export default function HomePage() {
+  const latestArticles = articles.slice(0, 3)
+
   return (
     <div className="bg-barricade-black">
 
@@ -20,7 +24,7 @@ export default function HomePage() {
         <div className="relative z-10 max-w-screen-xl mx-auto px-5 md:px-8 pb-20 md:pb-28 pt-40">
           <div className="max-w-4xl">
             <span className="inline-block text-xs tracking-[0.35em] uppercase text-barricade-red mb-6 md:mb-8">
-              San Antonio, TX — Independent Live Music Coverage
+              An independent music publication based in San Antonio, TX — covering live music everywhere.
             </span>
             <h1 className="font-display text-[clamp(5rem,16vw,14rem)] leading-none tracking-widest text-white mb-4 md:mb-6">
               STAGE<br />PULSE
@@ -33,49 +37,77 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── COMING SOON ─────────────────────────────────────────────────── */}
-      <section className="max-w-screen-xl mx-auto px-5 md:px-8 py-16 md:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-          <div className="border border-barricade-border p-8 md:p-12">
-            <span className="block text-xs tracking-widest uppercase text-barricade-red mb-6">
-              First Coverage
-            </span>
-            <h2 className="font-display text-4xl md:text-5xl tracking-widest text-barricade-text mb-5 leading-tight">
-              LAUNCHING SOON
-            </h2>
-            <p className="text-barricade-secondary text-base leading-relaxed mb-6">
-              StagePulse is a brand new independent publication. Our first articles and photo galleries will be published after our first show.
-            </p>
-            <p className="text-barricade-secondary text-base leading-relaxed mb-6">
-              No ads. No label deals. No sponsored opinions. If a show was incredible, we'll tell you. If it wasn't, we'll tell you that too.
-            </p>
-            <p className="text-barricade-secondary text-sm leading-relaxed">
-              Follow{' '}
-              <a
-                href="https://instagram.com/stagepulselive"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-barricade-text hover:text-barricade-red transition-colors"
-              >
-                @stagepulselive
-              </a>
-              {' '}on Instagram and TikTok to know when we publish.
-            </p>
+      {/* ── RECENT COVERAGE ──────────────────────────────────────────────── */}
+      {latestArticles.length > 0 && (
+        <section className="max-w-screen-xl mx-auto px-5 md:px-8 py-16 md:py-20">
+          <div className="flex items-end justify-between mb-10 md:mb-12">
+            <div>
+              <div className="h-0.5 w-8 bg-barricade-red mb-4" />
+              <h2 className="font-display text-4xl md:text-5xl tracking-widest text-barricade-text">
+                RECENT COVERAGE
+              </h2>
+            </div>
+            <Link
+              href="/articles"
+              className="hidden sm:block text-xs tracking-widest uppercase text-barricade-muted hover:text-barricade-secondary transition-colors"
+            >
+              All Articles →
+            </Link>
           </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+            {latestArticles.map((article) => (
+              <ArticleCard key={article.slug} article={article} />
+            ))}
+          </div>
+          <div className="mt-10 sm:hidden">
+            <Link
+              href="/articles"
+              className="text-xs tracking-widest uppercase text-barricade-muted hover:text-barricade-secondary transition-colors"
+            >
+              All Articles →
+            </Link>
+          </div>
+        </section>
+      )}
 
-          <div className="border border-barricade-border border-l-0 p-8 md:p-12 bg-[#0d0d0d]">
-            <span className="block text-xs tracking-widest uppercase text-barricade-red mb-6">
+      {/* ── DIVIDER ─────────────────────────────────────────────────────── */}
+      <div className="max-w-screen-xl mx-auto px-5 md:px-8">
+        <div className="h-px bg-barricade-border" />
+      </div>
+
+      {/* ── FIRST SHOW ──────────────────────────────────────────────────── */}
+      <section className="max-w-screen-xl mx-auto px-5 md:px-8 py-14 md:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 max-w-3xl">
+          <div className="border border-barricade-border p-8 md:p-10">
+            <span className="block text-xs tracking-widest uppercase text-barricade-red mb-5">
               First Show
             </span>
-            <h3 className="font-display text-3xl md:text-4xl tracking-widest text-barricade-text mb-3">
+            <h3 className="font-display text-3xl md:text-4xl tracking-widest text-barricade-text mb-2">
               CHE
             </h3>
             <p className="text-barricade-secondary text-sm uppercase tracking-widest mb-1">
               Paper Tiger — San Antonio
             </p>
-            <p className="text-barricade-muted text-sm mb-6">May 14, 2026</p>
-            <p className="text-barricade-secondary text-sm leading-relaxed">
-              Che — Paper Tiger — May 14, 2026 — On our radar.
+            <p className="text-barricade-muted text-sm mb-5">May 14, 2026</p>
+            <p className="text-barricade-muted text-sm leading-relaxed">
+              On our radar.
+            </p>
+          </div>
+          <div className="border border-barricade-border border-t-0 lg:border-t lg:border-l-0 p-8 md:p-10 bg-[#0d0d0d] flex flex-col justify-center">
+            <p className="text-barricade-secondary text-sm leading-relaxed mb-5">
+              No ads. No label deals. No sponsored opinions. If a show was incredible, we'll tell you. If it wasn't, we'll tell you that too.
+            </p>
+            <p className="text-barricade-muted text-xs leading-relaxed">
+              Follow{' '}
+              <a
+                href="https://instagram.com/stagepulselive"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-barricade-secondary hover:text-barricade-text transition-colors"
+              >
+                @stagepulselive
+              </a>
+              {' '}on Instagram and TikTok.
             </p>
           </div>
         </div>
