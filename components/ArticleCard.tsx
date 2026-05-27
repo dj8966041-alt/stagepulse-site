@@ -4,37 +4,103 @@ import type { Article } from '@/lib/data'
 
 type Props = {
   article: Article
-  variant?: 'default' | 'large' | 'horizontal'
+  variant?: 'default' | 'large' | 'horizontal' | 'feature'
+}
+
+function Cover({ article, aspectRatio }: { article: Article; aspectRatio: string }) {
+  if (article.heroImage) {
+    return (
+      <div
+        className="relative overflow-hidden bg-sp-card"
+        style={{ aspectRatio }}
+        role="img"
+        aria-label={article.title}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={article.heroImage}
+          alt={article.title}
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.03]"
+        />
+      </div>
+    )
+  }
+  return (
+    <PhotoPlaceholder
+      index={article.coverIndex}
+      alt={article.title}
+      aspectRatio={aspectRatio}
+      className="transition-transform duration-[600ms] group-hover:scale-[1.03]"
+    />
+  )
+}
+
+function Meta({ article, light = false }: { article: Article; light?: boolean }) {
+  const color = light ? 'text-sp-soft' : 'text-sp-muted'
+  return (
+    <div className={`flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.7rem] uppercase tracking-[0.18em] ${color}`}>
+      <span>{article.author}</span>
+      <span className="text-sp-subtle">·</span>
+      <span>{article.displayDate}</span>
+      <span className="text-sp-subtle">·</span>
+      <span>{article.readTime}</span>
+    </div>
+  )
+}
+
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex items-center gap-2 text-[0.65rem] tracking-[0.3em] uppercase text-sp-accent font-medium">
+      <span className="w-3 h-px bg-sp-accent" />
+      {children}
+    </span>
+  )
 }
 
 export default function ArticleCard({ article, variant = 'default' }: Props) {
+  // Feature — used for the marquee homepage hero card
+  if (variant === 'feature') {
+    return (
+      <Link href={`/articles/${article.slug}`} className="group block">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="lg:col-span-7 overflow-hidden">
+            <Cover article={article} aspectRatio="3/2" />
+          </div>
+          <div className="lg:col-span-5">
+            <div className="mb-5">
+              <Eyebrow>{article.category}</Eyebrow>
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-[2.7rem] tracking-tight text-sp-text leading-[1.05] mb-5 group-hover:text-sp-accent transition-colors duration-200 text-balance">
+              {article.title}
+            </h2>
+            <p className="text-sp-soft text-base md:text-lg leading-relaxed line-clamp-3 mb-6 font-light">
+              {article.subtitle}
+            </p>
+            <Meta article={article} />
+          </div>
+        </div>
+      </Link>
+    )
+  }
+
   if (variant === 'large') {
     return (
       <Link href={`/articles/${article.slug}`} className="group block">
         <div className="relative overflow-hidden">
-          <PhotoPlaceholder
-            index={article.coverIndex}
-            alt={article.title}
-            aspectRatio="16/9"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-            <span className="inline-block text-xs tracking-widest uppercase text-barricade-red mb-3">
-              {article.category}
-            </span>
-            <h2 className="font-display text-3xl md:text-5xl tracking-wide text-white leading-tight mb-2 group-hover:text-barricade-red transition-colors duration-200">
+          <Cover article={article} aspectRatio="16/9" />
+          <div className="absolute inset-0 bg-gradient-to-t from-sp-black via-sp-black/40 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
+            <div className="mb-4">
+              <Eyebrow>{article.category}</Eyebrow>
+            </div>
+            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl tracking-tight text-sp-text leading-[1.05] mb-3 group-hover:text-sp-accent transition-colors duration-200 text-balance max-w-4xl">
               {article.title}
             </h2>
-            <p className="text-barricade-secondary text-sm leading-relaxed hidden md:block line-clamp-2 mb-4 max-w-2xl">
+            <p className="text-sp-soft text-sm md:text-base leading-relaxed hidden md:block line-clamp-2 mb-5 max-w-2xl font-light">
               {article.subtitle}
             </p>
-            <div className="flex items-center gap-3">
-              <span className="text-xs text-barricade-muted uppercase tracking-widest">{article.author}</span>
-              <span className="text-barricade-border">·</span>
-              <span className="text-xs text-barricade-muted">{article.displayDate}</span>
-              <span className="text-barricade-border">·</span>
-              <span className="text-xs text-barricade-muted">{article.readTime}</span>
-            </div>
+            <Meta article={article} light />
           </div>
         </div>
       </Link>
@@ -43,51 +109,39 @@ export default function ArticleCard({ article, variant = 'default' }: Props) {
 
   if (variant === 'horizontal') {
     return (
-      <Link href={`/articles/${article.slug}`} className="group flex gap-4">
+      <Link href={`/articles/${article.slug}`} className="group flex gap-5">
         <div className="flex-shrink-0 w-28 md:w-36 overflow-hidden">
-          <PhotoPlaceholder
-            index={article.coverIndex}
-            alt={article.title}
-            aspectRatio="4/3"
-          />
+          <Cover article={article} aspectRatio="4/3" />
         </div>
         <div className="flex flex-col justify-center min-w-0">
-          <span className="text-xs tracking-widest uppercase text-barricade-red mb-1">{article.category}</span>
-          <h3 className="font-display text-xl tracking-wide text-barricade-text group-hover:text-barricade-red transition-colors leading-tight line-clamp-2">
+          <div className="mb-2">
+            <Eyebrow>{article.category}</Eyebrow>
+          </div>
+          <h3 className="font-display text-xl tracking-tight text-sp-text group-hover:text-sp-accent transition-colors leading-tight line-clamp-2">
             {article.title}
           </h3>
-          <p className="text-xs text-barricade-muted mt-1.5">{article.displayDate}</p>
+          <p className="text-[0.7rem] text-sp-muted mt-2 uppercase tracking-[0.18em]">{article.displayDate}</p>
         </div>
       </Link>
     )
   }
 
-  // default — cover image top, category, title, subtitle, author/date bottom
+  // default — editorial card with large cover above title
   return (
     <Link href={`/articles/${article.slug}`} className="group block">
-      <div className="overflow-hidden mb-4 border border-barricade-border">
-        <PhotoPlaceholder
-          index={article.coverIndex}
-          alt={article.title}
-          aspectRatio="3/2"
-        />
+      <div className="overflow-hidden mb-5">
+        <Cover article={article} aspectRatio="3/2" />
       </div>
-      <span className="inline-block text-xs tracking-widest uppercase text-barricade-red mb-2">
-        {article.category}
-      </span>
-      <h3 className="font-display text-2xl md:text-3xl tracking-wide text-barricade-text group-hover:text-barricade-red transition-colors duration-200 leading-tight mb-2">
+      <div className="mb-3">
+        <Eyebrow>{article.category}</Eyebrow>
+      </div>
+      <h3 className="font-display text-2xl md:text-[1.8rem] tracking-tight text-sp-text group-hover:text-sp-accent transition-colors duration-200 leading-[1.1] mb-3 text-balance">
         {article.title}
       </h3>
-      <p className="text-barricade-secondary text-sm leading-relaxed line-clamp-2 mb-4">
+      <p className="text-sp-soft text-sm md:text-base leading-relaxed line-clamp-2 mb-4 font-light">
         {article.subtitle}
       </p>
-      <div className="flex items-center gap-3 text-xs text-barricade-muted uppercase tracking-widest">
-        <span>{article.author}</span>
-        <span className="text-barricade-border">·</span>
-        <span>{article.displayDate}</span>
-        <span className="text-barricade-border">·</span>
-        <span>{article.readTime}</span>
-      </div>
+      <Meta article={article} />
     </Link>
   )
 }

@@ -17,7 +17,9 @@ export default function ContactPage() {
   const [submitError, setSubmitError] = useState<string | null>(null)
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) {
     setSubmitError(null)
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
   }
@@ -28,7 +30,7 @@ export default function ContactPage() {
     setStatus('sending')
     const topic = INQUIRY_LABELS[form.subject] ?? form.subject
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('/api/contact/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -52,89 +54,119 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="bg-barricade-black min-h-screen">
+    <div className="bg-sp-black min-h-screen">
       {/* Header */}
-      <div className="border-b border-barricade-border pt-36 pb-12 md:pb-16">
+      <section className="pt-36 md:pt-44 pb-12 md:pb-16 border-b border-sp-border-soft">
         <div className="max-w-screen-xl mx-auto px-5 md:px-8">
-          <span className="block text-xs tracking-[0.35em] uppercase text-barricade-red mb-4">
-            StagePulse
+          <span className="inline-flex items-center gap-3 text-[0.7rem] tracking-[0.35em] uppercase text-sp-accent mb-6">
+            <span>★</span> Get in touch
           </span>
-          <h1 className="font-display text-6xl md:text-8xl tracking-widest text-barricade-text mb-4">
-            CONTACT
+          <h1 className="font-display italic text-5xl md:text-7xl lg:text-[6rem] tracking-tight text-sp-text leading-[0.95] mb-6 max-w-3xl text-balance">
+            Contact.
           </h1>
-          <p className="text-barricade-secondary text-base md:text-lg max-w-lg leading-relaxed">
+          <p className="text-sp-soft text-base md:text-xl max-w-2xl leading-relaxed font-light">
             Playing a show? Pitching a story? Want to collaborate? We read everything that comes in.
           </p>
         </div>
-      </div>
+      </section>
 
-      <div className="max-w-screen-xl mx-auto px-5 md:px-8 py-14 md:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 md:gap-16">
-          {/* Contact info sidebar */}
-          <div className="lg:col-span-4">
-            <div className="space-y-10">
+      <section className="max-w-screen-xl mx-auto px-5 md:px-8 py-14 md:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-14 md:gap-20">
+          {/* Sidebar */}
+          <aside className="lg:col-span-4">
+            <div className="space-y-12">
               <div>
-                <h2 className="font-display text-3xl tracking-widest text-barricade-text mb-6">
-                  GET IN TOUCH
+                <h2 className="font-display italic text-3xl md:text-4xl tracking-tight text-sp-text mb-5 leading-tight">
+                  Reach the desk.
                 </h2>
-                <p className="text-barricade-secondary text-sm leading-relaxed mb-6">
-                  We're a small, independent operation, so response times can vary — but we do respond. Press and media inquiries typically receive replies within 48 hours.
+                <p className="text-sp-soft text-sm md:text-base leading-relaxed font-light">
+                  We're a small, independent operation, so response times can vary — but we do respond. Press and media inquiries typically get a reply within 48 hours.
                 </p>
               </div>
 
-              <div className="space-y-6">
-                <div className="pt-6 border-t border-barricade-border">
-                  <p className="text-xs tracking-widest uppercase text-barricade-muted mb-2">Press & Media</p>
-                  <a href="mailto:stagepulselive@gmail.com" className="text-barricade-text hover:text-barricade-red transition-colors text-sm">
-                    stagepulselive@gmail.com
-                  </a>
-                  <p className="text-barricade-muted text-xs mt-1 leading-relaxed">
-                    Photo pass requests, press credentials, interviews, and media inquiries.
-                  </p>
+              <dl className="space-y-7">
+                <div className="pt-6 border-t border-sp-border-soft">
+                  <dt className="text-[0.65rem] tracking-[0.3em] uppercase text-sp-muted mb-2">
+                    Press & media
+                  </dt>
+                  <dd>
+                    <a
+                      href="mailto:stagepulselive@gmail.com"
+                      className="text-sp-text-2 hover:text-sp-accent transition-colors text-sm md:text-base"
+                    >
+                      stagepulselive@gmail.com
+                    </a>
+                    <p className="text-sp-muted text-xs mt-2 leading-relaxed">
+                      Photo passes, press credentials, interviews, media inquiries.
+                    </p>
+                  </dd>
                 </div>
 
-                <div className="pt-6 border-t border-barricade-border">
-                  <p className="text-xs tracking-widest uppercase text-barricade-muted mb-2">General & Pitches</p>
-                  <a href="mailto:stagepulselive@gmail.com" className="text-barricade-text hover:text-barricade-red transition-colors text-sm">
-                    stagepulselive@gmail.com
-                  </a>
-                  <p className="text-barricade-muted text-xs mt-1 leading-relaxed">
-                    Story pitches, show tips, photographer submissions, general inquiries.
-                  </p>
+                <div className="pt-6 border-t border-sp-border-soft">
+                  <dt className="text-[0.65rem] tracking-[0.3em] uppercase text-sp-muted mb-2">
+                    General & pitches
+                  </dt>
+                  <dd>
+                    <a
+                      href="mailto:stagepulselive@gmail.com"
+                      className="text-sp-text-2 hover:text-sp-accent transition-colors text-sm md:text-base"
+                    >
+                      stagepulselive@gmail.com
+                    </a>
+                    <p className="text-sp-muted text-xs mt-2 leading-relaxed">
+                      Story pitches, show tips, photographer submissions.
+                    </p>
+                  </dd>
                 </div>
 
-                <div className="pt-6 border-t border-barricade-border">
-                  <p className="text-xs tracking-widest uppercase text-barricade-muted mb-3">Find us on</p>
-                  <div className="flex flex-col gap-2">
-                    <a href="https://instagram.com/stagepulselive" target="_blank" rel="noopener noreferrer" className="text-barricade-secondary hover:text-barricade-text transition-colors text-sm">
+                <div className="pt-6 border-t border-sp-border-soft">
+                  <dt className="text-[0.65rem] tracking-[0.3em] uppercase text-sp-muted mb-3">
+                    Find us on
+                  </dt>
+                  <dd className="flex flex-col gap-2">
+                    <a
+                      href="https://instagram.com/stagepulselive"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sp-text-2 hover:text-sp-accent transition-colors text-sm"
+                    >
                       Instagram — @stagepulselive
                     </a>
-                    <a href="https://tiktok.com/@stagepulselive" target="_blank" rel="noopener noreferrer" className="text-barricade-secondary hover:text-barricade-text transition-colors text-sm">
+                    <a
+                      href="https://tiktok.com/@stagepulselive"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sp-text-2 hover:text-sp-accent transition-colors text-sm"
+                    >
                       TikTok — @stagepulselive
                     </a>
-                  </div>
+                  </dd>
                 </div>
 
-                <div className="pt-6 border-t border-barricade-border">
-                  <p className="text-xs tracking-widest uppercase text-barricade-muted mb-2">Location</p>
-                  <p className="text-barricade-secondary text-sm">San Antonio, TX</p>
-                  <p className="text-barricade-muted text-xs mt-1">
-                    We cover shows across greater San Antonio and travel for the right story.
-                  </p>
+                <div className="pt-6 border-t border-sp-border-soft">
+                  <dt className="text-[0.65rem] tracking-[0.3em] uppercase text-sp-muted mb-2">
+                    Based in
+                  </dt>
+                  <dd>
+                    <p className="text-sp-text-2 text-sm md:text-base">San Antonio, Texas</p>
+                    <p className="text-sp-muted text-xs mt-2 leading-relaxed">
+                      We cover shows across Texas and travel for the right story.
+                    </p>
+                  </dd>
                 </div>
-              </div>
+              </dl>
             </div>
-          </div>
+          </aside>
 
-          {/* Contact form */}
+          {/* Form */}
           <div className="lg:col-span-8">
             {status === 'sent' ? (
-              <div className="border border-barricade-border p-10 md:p-14 text-center">
-                <div className="h-0.5 w-10 bg-barricade-red mx-auto mb-8" />
-                <h2 className="font-display text-4xl md:text-5xl tracking-widest text-barricade-text mb-4">
-                  MESSAGE SENT
+              <div className="bg-sp-card border border-sp-border p-10 md:p-16 text-center">
+                <div className="text-sp-accent mb-6 text-xl">★</div>
+                <h2 className="font-display italic text-4xl md:text-5xl tracking-tight text-sp-text mb-4 leading-tight">
+                  Message sent.
                 </h2>
-                <p className="text-barricade-secondary text-base leading-relaxed max-w-sm mx-auto">
+                <p className="text-sp-soft text-base leading-relaxed max-w-sm mx-auto font-light">
                   We've received your message and will respond within 48 hours. Thanks for reaching out.
                 </p>
               </div>
@@ -142,7 +174,10 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="name" className="block text-xs tracking-widest uppercase text-barricade-muted mb-2">
+                    <label
+                      htmlFor="name"
+                      className="block text-[0.65rem] tracking-[0.3em] uppercase text-sp-muted mb-3"
+                    >
                       Name *
                     </label>
                     <input
@@ -153,11 +188,14 @@ export default function ContactPage() {
                       value={form.name}
                       onChange={handleChange}
                       placeholder="Your name"
-                      className="w-full bg-transparent border border-barricade-border text-barricade-text placeholder:text-barricade-muted/50 px-4 py-3.5 text-sm focus:outline-none focus:border-barricade-red transition-colors"
+                      className="w-full bg-sp-card border border-sp-border text-sp-text placeholder:text-sp-muted/50 px-4 py-3.5 text-sm focus:outline-none focus:border-sp-accent transition-colors"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-xs tracking-widest uppercase text-barricade-muted mb-2">
+                    <label
+                      htmlFor="email"
+                      className="block text-[0.65rem] tracking-[0.3em] uppercase text-sp-muted mb-3"
+                    >
                       Email *
                     </label>
                     <input
@@ -168,14 +206,17 @@ export default function ContactPage() {
                       value={form.email}
                       onChange={handleChange}
                       placeholder="your@email.com"
-                      className="w-full bg-transparent border border-barricade-border text-barricade-text placeholder:text-barricade-muted/50 px-4 py-3.5 text-sm focus:outline-none focus:border-barricade-red transition-colors"
+                      className="w-full bg-sp-card border border-sp-border text-sp-text placeholder:text-sp-muted/50 px-4 py-3.5 text-sm focus:outline-none focus:border-sp-accent transition-colors"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-xs tracking-widest uppercase text-barricade-muted mb-2">
-                    Inquiry Type *
+                  <label
+                    htmlFor="subject"
+                    className="block text-[0.65rem] tracking-[0.3em] uppercase text-sp-muted mb-3"
+                  >
+                    Inquiry type *
                   </label>
                   <select
                     id="subject"
@@ -183,9 +224,11 @@ export default function ContactPage() {
                     required
                     value={form.subject}
                     onChange={handleChange}
-                    className="w-full bg-barricade-black border border-barricade-border text-barricade-text px-4 py-3.5 text-sm focus:outline-none focus:border-barricade-red transition-colors appearance-none cursor-pointer"
+                    className="w-full bg-sp-card border border-sp-border text-sp-text px-4 py-3.5 text-sm focus:outline-none focus:border-sp-accent transition-colors appearance-none cursor-pointer"
                   >
-                    <option value="" disabled>Select a topic</option>
+                    <option value="" disabled>
+                      Select a topic
+                    </option>
                     <option value="press">Press pass / photo credential request</option>
                     <option value="pitch">Story or album pitch</option>
                     <option value="photography">Photographer submission</option>
@@ -196,13 +239,16 @@ export default function ContactPage() {
                 </div>
 
                 {submitError && (
-                  <p className="text-sm text-barricade-red border border-barricade-red/40 bg-barricade-red/5 px-4 py-3">
+                  <p className="text-sm text-sp-accent border border-sp-accent/40 bg-sp-accent/5 px-4 py-3">
                     {submitError}
                   </p>
                 )}
 
                 <div>
-                  <label htmlFor="message" className="block text-xs tracking-widest uppercase text-barricade-muted mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-[0.65rem] tracking-[0.3em] uppercase text-sp-muted mb-3"
+                  >
                     Message *
                   </label>
                   <textarea
@@ -213,19 +259,19 @@ export default function ContactPage() {
                     onChange={handleChange}
                     rows={8}
                     placeholder="Tell us what's on your mind. If you're requesting press credentials, include the show name, date, venue, and your outlet or portfolio link."
-                    className="w-full bg-transparent border border-barricade-border text-barricade-text placeholder:text-barricade-muted/50 px-4 py-3.5 text-sm focus:outline-none focus:border-barricade-red transition-colors resize-none"
+                    className="w-full bg-sp-card border border-sp-border text-sp-text placeholder:text-sp-muted/50 px-4 py-3.5 text-sm focus:outline-none focus:border-sp-accent transition-colors resize-none"
                   />
                 </div>
 
-                <div className="flex items-start gap-4">
+                <div className="flex flex-wrap items-start gap-4 pt-2">
                   <button
                     type="submit"
                     disabled={status === 'sending'}
-                    className="inline-block text-xs tracking-widest uppercase bg-barricade-red text-white px-8 py-4 hover:bg-barricade-red-hover transition-colors disabled:opacity-60"
+                    className="inline-flex items-center gap-2 bg-sp-accent text-sp-black text-[0.7rem] tracking-[0.25em] uppercase font-semibold px-8 py-4 hover:bg-sp-accent-hover transition-colors disabled:opacity-60"
                   >
-                    {status === 'sending' ? 'Sending...' : 'Send Message'}
+                    {status === 'sending' ? 'Sending…' : 'Send message →'}
                   </button>
-                  <p className="text-barricade-muted text-xs leading-relaxed pt-1">
+                  <p className="text-sp-muted text-xs leading-relaxed pt-1 max-w-xs">
                     We don't share your information with anyone. This form goes directly to our inbox.
                   </p>
                 </div>
@@ -233,7 +279,7 @@ export default function ContactPage() {
             )}
           </div>
         </div>
-      </div>
+      </section>
     </div>
   )
 }

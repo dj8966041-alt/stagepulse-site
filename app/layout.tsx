@@ -1,14 +1,14 @@
 import type { Metadata } from 'next'
-import { Bebas_Neue, Inter } from 'next/font/google'
+import { Bebas_Neue, Fraunces, Inter } from 'next/font/google'
 import './globals.css'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 
-const bebasNeue = Bebas_Neue({
-  weight: '400',
+const fraunces = Fraunces({
   subsets: ['latin'],
-  variable: '--font-bebas',
+  variable: '--font-fraunces',
   display: 'swap',
+  axes: ['SOFT', 'opsz'],
 })
 
 const inter = Inter({
@@ -17,17 +17,37 @@ const inter = Inter({
   display: 'swap',
 })
 
+const bebasNeue = Bebas_Neue({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-bebas',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   title: {
-    default: 'StagePulse — Up Close. Every Show.',
+    default: 'StagePulse — Texas-born. Music-driven.',
     template: '%s | StagePulse',
   },
   description:
-    "An independent music publication based in San Antonio, TX — covering live music everywhere. Concert reviews, photo galleries, artist spotlights, and show previews across every genre.",
-  keywords: ['live music', 'san antonio', 'concert photography', 'music reviews', 'local music', 'stagepulse'],
+    'StagePulse is a Texas-based independent music and culture publication covering concerts, artist interviews, and fan culture across Texas and beyond. Founded in San Antonio.',
+  keywords: [
+    'live music',
+    'concerts',
+    'texas music',
+    'san antonio',
+    'artist interviews',
+    'concert photography',
+    'fan culture',
+    'music publication',
+    'stagepulse',
+  ],
   authors: [{ name: 'Diego Jauregui' }],
   openGraph: {
     siteName: 'StagePulse',
+    title: 'StagePulse — Texas-born. Music-driven.',
+    description:
+      'Independent music and culture publication from San Antonio, covering live shows, artists, and fan culture across Texas and beyond.',
     locale: 'en_US',
     type: 'website',
   },
@@ -35,8 +55,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${bebasNeue.variable} ${inter.variable}`}>
-      <body className="bg-barricade-black font-sans text-barricade-text min-h-screen">
+    <html lang="en" className={`${fraunces.variable} ${inter.variable} ${bebasNeue.variable}`}>
+      <body className="bg-sp-black font-sans text-sp-text-2 min-h-screen antialiased">
         <Nav />
         <main>{children}</main>
         <Footer />

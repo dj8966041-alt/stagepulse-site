@@ -5,157 +5,166 @@ import PhotoPlaceholder from '@/components/PhotoPlaceholder'
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'StagePulse is an independent music publication based in San Antonio, TX. Live music across every genre, every venue, every level.',
+    'StagePulse is a Texas-based independent publication covering live music, concerts, artist interviews, and fan culture across Texas and beyond. Founded in San Antonio in 2026.',
 }
 
 export default function AboutPage() {
   return (
-    <div className="bg-barricade-black min-h-screen">
-      {/* Header */}
-      <div className="pt-36 pb-0 md:pb-0">
+    <div className="bg-sp-black min-h-screen">
+      {/* Page intro */}
+      <section className="pt-36 md:pt-44 pb-8 md:pb-12">
         <div className="max-w-screen-xl mx-auto px-5 md:px-8">
-          <span className="block text-xs tracking-[0.35em] uppercase text-barricade-red mb-4">
-            StagePulse
+          <span className="inline-flex items-center gap-3 text-[0.7rem] tracking-[0.35em] uppercase text-sp-accent mb-6">
+            <span>★</span> About StagePulse
           </span>
-          <h1 className="font-display text-6xl md:text-8xl xl:text-[10rem] tracking-widest text-barricade-text leading-none mb-0">
-            ABOUT
+          <h1 className="font-display italic text-5xl md:text-7xl lg:text-[6rem] tracking-tight text-sp-text leading-[0.95] mb-6 max-w-4xl text-balance">
+            A Texas music<br className="hidden md:block" /> publication, in plain&nbsp;sight.
           </h1>
+          <p className="text-sp-soft text-lg md:text-xl max-w-2xl leading-relaxed font-light">
+            StagePulse is an independent publication covering concerts, artist interviews, and fan culture — based in San Antonio, reporting from everywhere the show is.
+          </p>
         </div>
-      </div>
+      </section>
 
-      {/* Hero image */}
-      <div className="max-w-screen-xl mx-auto px-5 md:px-8 mt-8 mb-0">
-        <PhotoPlaceholder index={4} aspectRatio="21/9" className="w-full" alt="Live show at a San Antonio venue" />
+      {/* Hero photo */}
+      <div className="max-w-screen-xl mx-auto px-5 md:px-8 mb-12 md:mb-16">
+        <PhotoPlaceholder
+          index={2}
+          aspectRatio="21/9"
+          className="w-full"
+          alt="Stage lights at a Texas live music venue"
+        />
       </div>
 
       {/* Main story */}
-      <div className="max-w-screen-xl mx-auto px-5 md:px-8 py-14 md:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16">
-          {/* Pull quote column */}
-          <div className="lg:col-span-4 lg:sticky lg:top-24 lg:self-start">
-            <div className="border-l-2 border-barricade-red pl-6">
-              <blockquote className="font-display text-3xl md:text-4xl tracking-widest text-barricade-text leading-tight">
-                &ldquo;Every show ends. We make sure it leaves something behind.&rdquo;
+      <section className="max-w-screen-xl mx-auto px-5 md:px-8 py-10 md:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20">
+          {/* Sidebar — facts */}
+          <aside className="lg:col-span-4 lg:sticky lg:top-28 lg:self-start">
+            <div className="border-l-2 border-sp-accent pl-6 mb-12">
+              <blockquote className="font-display italic text-2xl md:text-[1.7rem] text-sp-text leading-[1.2] tracking-tight">
+                "We cover the shows we actually went to, in the rooms we actually stood in."
               </blockquote>
             </div>
-            <div className="mt-10 pt-8 border-t border-barricade-border">
-              <p className="text-xs tracking-widest uppercase text-barricade-muted mb-3">Founded by</p>
-              <p className="text-barricade-text">Diego Jauregui</p>
-              <p className="text-barricade-muted text-xs mt-1">Founder &amp; Photographer</p>
-            </div>
-            <div className="mt-6 pt-6 border-t border-barricade-border">
-              <p className="text-xs tracking-widest uppercase text-barricade-muted mb-3">Based in</p>
-              <p className="text-barricade-text">San Antonio, TX</p>
-            </div>
-            <div className="mt-6 pt-6 border-t border-barricade-border">
-              <p className="text-xs tracking-widest uppercase text-barricade-muted mb-3">Founded</p>
-              <p className="text-barricade-text">2026</p>
-            </div>
-            <div className="mt-6 pt-6 border-t border-barricade-border">
-              <p className="text-xs tracking-widest uppercase text-barricade-muted mb-3">Coverage</p>
-              <p className="text-barricade-text">All genres. Every venue. No exceptions.</p>
-            </div>
-          </div>
 
-          {/* Story column */}
+            <dl className="space-y-6">
+              {[
+                { term: 'Based in', def: 'San Antonio, TX' },
+                { term: 'Founded', def: '2026' },
+                { term: 'Coverage', def: 'Concerts, interviews, fan culture — across Texas and beyond.' },
+                { term: 'Founder', def: 'Diego Jauregui' },
+              ].map(({ term, def }) => (
+                <div key={term} className="pt-5 border-t border-sp-border-soft">
+                  <dt className="text-[0.65rem] tracking-[0.3em] uppercase text-sp-muted mb-2">{term}</dt>
+                  <dd className="text-sp-text-2 text-sm md:text-base leading-relaxed">{def}</dd>
+                </div>
+              ))}
+            </dl>
+          </aside>
+
+          {/* Body */}
           <div className="lg:col-span-8">
-            <div className="prose max-w-none">
-              <p className="text-xl md:text-2xl text-barricade-text leading-loose mb-8 font-light">
-                StagePulse is an independent music publication based in San Antonio, TX. We cover live music across
-                every genre, every venue, every level — from club shows to festival stages.
+            <article className="space-y-7 text-sp-text-2">
+              <p className="font-display text-xl md:text-2xl lg:text-[1.6rem] leading-[1.5] text-sp-text font-light text-balance">
+                StagePulse is a music and culture publication built in Texas, born out of a simple idea: the shows happening here are worth covering with the same care any city would expect.
               </p>
 
-              <p className="text-barricade-secondary text-base md:text-lg leading-loose mb-6">
-                We started this because someone had to. The moments happening at shows right now — the ones that will
-                matter later, the ones people will wish they had photos of — most of them disappear without a trace.
-                StagePulse is here before they do.
+              <p className="text-sp-soft text-base md:text-lg leading-[1.85] font-light">
+                We're independent. No advertisers, no label relationships, no sponsored opinions. Every story, every photo, every interview is ours — and the only people we answer to are the readers and the artists we cover.
               </p>
 
-              <p className="text-barricade-secondary text-base md:text-lg leading-loose mb-6">
-                San Antonio has always had a scene. Punk, metal, cumbia, hip-hop, country, jazz, indie, hardcore —
-                generations of it. The music has always been here. The documentation hasn&apos;t always kept up. That
-                changes now — and it doesn&apos;t stop at city limits.
+              <p className="text-sp-soft text-base md:text-lg leading-[1.85] font-light">
+                San Antonio is home base. Texas is the beat. From intimate club shows on the Saint Mary's strip to festival stages in Austin, theaters in Houston, and the back patios where local scenes get built — we go where the music is and we file from there.
               </p>
 
-              <p className="text-barricade-secondary text-base md:text-lg leading-loose mb-6">
-                The approach is simple: get to the show, get close, and capture what&apos;s actually there. Not a
-                polished version of it. The real thing, in the light the stage gives us.
+              <p className="text-sp-soft text-base md:text-lg leading-[1.85] font-light">
+                And when artists we cover take their tours national, we follow. The frame doesn't end at the state line. Texas is where we live; the music is everywhere.
               </p>
 
-              <p className="text-barricade-secondary text-base md:text-lg leading-loose mb-10">
-                This is for the artists on the rise and the ones already there. For the kids in the crowd who needed
-                proof something real happened. For anyone who&apos;s ever left a show wishing they could hold onto it
-                a little longer.
-              </p>
-
-              <div className="border-l-2 border-barricade-red pl-6 my-10">
-                <p className="text-barricade-text text-xl leading-relaxed italic">
-                  &ldquo;A pulse. Something you feel before you process it. That&apos;s what we&apos;re chasing at
-                  every show.&rdquo;
+              <div className="border-l-2 border-sp-accent pl-6 py-2 my-10">
+                <p className="font-display italic text-xl md:text-2xl text-sp-text leading-[1.4] tracking-tight">
+                  Texas-born. Music-driven. Independent on every page.
                 </p>
               </div>
-            </div>
 
-            <div className="mt-12 pt-8 border-t border-barricade-border flex flex-wrap gap-4">
+              <p className="text-sp-soft text-base md:text-lg leading-[1.85] font-light">
+                The approach is straightforward: show up, get close, document what actually happened. The story comes from the room, not the press kit. The photos come from the pit, not a stock library. The opinions are ours, formed in real time, written without permission.
+              </p>
+
+              <p className="text-sp-soft text-base md:text-lg leading-[1.85] font-light">
+                This is for the people in the crowd who knew something real was happening — and for the artists building careers one room at a time, who deserve coverage as honest as the work they put in.
+              </p>
+            </article>
+
+            <div className="mt-14 pt-10 border-t border-sp-border-soft flex flex-wrap gap-4 items-center">
               <Link
                 href="/contact"
-                className="inline-block text-xs tracking-widest uppercase text-barricade-text border border-barricade-border hover:border-barricade-red hover:text-barricade-red px-8 py-4 transition-all duration-300"
+                className="inline-flex items-center gap-2 bg-sp-accent text-sp-black text-[0.7rem] tracking-[0.25em] uppercase font-semibold px-7 py-4 hover:bg-sp-accent-hover transition-colors"
               >
-                Get in Touch
+                Get in touch
+                <span aria-hidden="true">→</span>
               </Link>
               <Link
-                href="/press"
-                className="inline-block text-xs tracking-widest uppercase text-barricade-muted hover:text-barricade-secondary transition-colors pt-4"
+                href="/apply"
+                className="text-[0.7rem] tracking-[0.25em] uppercase text-sp-muted hover:text-sp-accent transition-colors"
               >
-                Press &amp; Media Info →
+                Apply to contribute →
               </Link>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Values strip */}
-      <div className="border-t border-barricade-border bg-[#0d0d0d]">
-        <div className="max-w-screen-xl mx-auto px-5 md:px-8 py-14 md:py-16">
-          <h2 className="font-display text-4xl md:text-5xl tracking-widest text-barricade-text mb-12 md:mb-14">
-            HOW WE WORK
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0">
+      {/* How we work */}
+      <section className="border-t border-sp-border-soft bg-sp-card">
+        <div className="max-w-screen-xl mx-auto px-5 md:px-8 py-20 md:py-28">
+          <div className="mb-14 md:mb-16">
+            <span className="block text-[0.65rem] tracking-[0.35em] uppercase text-sp-accent mb-5">
+              ★ How we work
+            </span>
+            <h2 className="font-display italic text-4xl md:text-6xl text-sp-text leading-[1.05] tracking-tight max-w-3xl text-balance">
+              The values behind every story.
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-sp-border-soft">
             {[
               {
                 title: 'Independent',
-                body: 'No advertisers, no label relationships, no promotional agreements. Every review and gallery is produced without any financial arrangement with the subjects.',
+                body: 'No advertisers. No label relationships. No promotional agreements. Every review and feature is produced without any financial arrangement with the subjects.',
               },
               {
-                title: 'All Genres',
-                body: 'Underground rap, indie rock, cumbia, punk, jazz, country, metal, electronic — we cover it all. If it\'s live and it\'s in San Antonio, we\'re interested.',
+                title: 'On the ground',
+                body: "If we covered a show, we were at the show. Standing on the floor, often near the front. Everything we publish starts from being there.",
               },
               {
-                title: 'Available Light',
-                body: 'We shoot without flash. It\'s a constraint we embrace — it keeps the work honest and keeps us close to the actual energy of the room.',
+                title: 'Available light',
+                body: "We shoot without flash. It keeps us close to the actual energy of the room — and keeps the work honest to what the night actually looked like.",
               },
               {
-                title: 'Honest',
-                body: 'We don\'t write press releases. We don\'t pre-agree to positive coverage. We go to the show and we write what happened.',
+                title: 'Honest by default',
+                body: "We don't write press releases. We don't pre-agree to positive coverage. We go to the show and we write what happened — the good and the rough.",
               },
               {
-                title: 'Local First',
-                body: 'We exist to serve San Antonio. Major touring acts are covered when they come through, but local and regional artists are always the priority.',
+                title: 'Built in San Antonio',
+                body: 'Home base is SA. We cover this city like it deserves. When the story leaves Texas, so do we — but it always starts here.',
               },
               {
-                title: 'Up Close',
-                body: 'The name is not incidental. We are at the front. Always. That proximity is what makes the work worth doing and worth reading.',
+                title: 'For the readers',
+                body: "We write for fans first — people who care enough to read 1,200 words about a Tuesday show. That's the audience. That's the bar.",
               },
             ].map(({ title, body }) => (
-              <div key={title} className="border border-barricade-border p-6 md:p-8 -mt-px -ml-px">
-                <div className="h-0.5 w-6 bg-barricade-red mb-5" />
-                <h3 className="font-display text-2xl md:text-3xl tracking-widest text-barricade-text mb-3">{title}</h3>
-                <p className="text-barricade-secondary text-sm leading-relaxed">{body}</p>
+              <div key={title} className="bg-sp-card p-7 md:p-9">
+                <div className="text-sp-accent mb-5 text-sm">★</div>
+                <h3 className="font-display text-2xl md:text-[1.7rem] text-sp-text mb-3 tracking-tight leading-tight">
+                  {title}
+                </h3>
+                <p className="text-sp-soft text-sm md:text-base leading-relaxed font-light">{body}</p>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
     </div>
   )
 }

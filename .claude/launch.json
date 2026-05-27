@@ -4,8 +4,8 @@
     {
       "name": "the-barricade",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "--port", "3399"],
-      "port": 3399
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000
     }
   ]
 }
