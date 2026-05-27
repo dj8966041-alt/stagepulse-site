@@ -18,10 +18,10 @@ export default function AboutPage() {
             <span>★</span> About StagePulse
           </span>
           <h1 className="font-display italic text-5xl md:text-7xl lg:text-[6rem] tracking-tight text-sp-text leading-[0.95] mb-6 max-w-4xl text-balance">
-            A Texas music<br className="hidden md:block" /> publication, in plain&nbsp;sight.
+            An independent music<br className="hidden md:block" /> publication, in plain&nbsp;sight.
           </h1>
           <p className="text-sp-soft text-lg md:text-xl max-w-2xl leading-relaxed font-light">
-            StagePulse is an independent publication covering concerts, artist interviews, and fan culture — based in San Antonio, reporting from everywhere the show is.
+            StagePulse covers concerts, artist interviews, and fan culture — based in San Antonio, reporting from wherever the show is.
           </p>
         </div>
       </section>
@@ -74,16 +74,16 @@ export default function AboutPage() {
               </p>
 
               <p className="text-sp-soft text-base md:text-lg leading-[1.85] font-light">
-                San Antonio is home base. Texas is the beat. From intimate club shows on the Saint Mary's strip to festival stages in Austin, theaters in Houston, and the back patios where local scenes get built — we go where the music is and we file from there.
+                San Antonio is home base. The shows are everywhere. From intimate club rooms on the Saint Mary's strip to festival stages in Austin, theaters in Houston, and the back patios where local scenes get built — we go where the music is and we file from there.
               </p>
 
               <p className="text-sp-soft text-base md:text-lg leading-[1.85] font-light">
-                And when artists we cover take their tours national, we follow. The frame doesn't end at the state line. Texas is where we live; the music is everywhere.
+                And when artists we cover take their tours national, we follow. The frame doesn't end at the state line — where we live is just where it starts. The music is everywhere.
               </p>
 
               <div className="border-l-2 border-sp-accent pl-6 py-2 my-10">
                 <p className="font-display italic text-xl md:text-2xl text-sp-text leading-[1.4] tracking-tight">
-                  Texas-born. Music-driven. Independent on every page.
+                  In the room. On the record. Independent on every page.
                 </p>
               </div>
 

@@ -26,28 +26,30 @@ const bebasNeue = Bebas_Neue({
 
 export const metadata: Metadata = {
   title: {
-    default: 'StagePulse — Texas-born. Music-driven.',
+    default: 'StagePulse — Independent live music coverage',
     template: '%s | StagePulse',
   },
   description:
-    'StagePulse is a Texas-based independent music and culture publication covering concerts, artist interviews, and fan culture across Texas and beyond. Founded in San Antonio.',
+    'StagePulse is an independent music and culture publication covering live concerts, artist interviews, and fan culture. Filed from the rooms where the shows happen.',
   keywords: [
     'live music',
     'concerts',
-    'texas music',
-    'san antonio',
+    'concert reviews',
     'artist interviews',
     'concert photography',
     'fan culture',
     'music publication',
+    'hip-hop coverage',
+    'underground music',
+    'san antonio',
     'stagepulse',
   ],
   authors: [{ name: 'Diego Jauregui' }],
   openGraph: {
     siteName: 'StagePulse',
-    title: 'StagePulse — Texas-born. Music-driven.',
+    title: 'StagePulse — Independent live music coverage',
     description:
-      'Independent music and culture publication from San Antonio, covering live shows, artists, and fan culture across Texas and beyond.',
+      'Independent music and culture publication covering live shows, artists, and fan culture — filed from the rooms where the shows happen.',
     locale: 'en_US',
     type: 'website',
   },

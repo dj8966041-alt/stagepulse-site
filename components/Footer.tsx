@@ -33,8 +33,8 @@ export default function Footer() {
         {/* Big editorial tagline anchored to the footer top */}
         <div className="pb-14 border-b border-sp-border-soft mb-14">
           <p className="font-display italic text-4xl md:text-6xl lg:text-7xl text-sp-text leading-[1.05] tracking-tight max-w-4xl">
-            Texas-born.<br />
-            <span className="text-sp-accent">Music-driven.</span>
+            In the room.<br />
+            <span className="text-sp-accent">On the record.</span>
           </p>
         </div>
 
@@ -119,7 +119,7 @@ export default function Footer() {
             © 2026 StagePulse — San Antonio, Texas
           </p>
           <p className="text-sp-muted text-xs italic font-display">
-            Live music. Real stories. From Texas, with volume.
+            Live music. Real stories. No filter.
           </p>
         </div>
       </div>

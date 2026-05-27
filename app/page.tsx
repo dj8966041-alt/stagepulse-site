@@ -62,12 +62,12 @@ export default function HomePage() {
 
         <div className="relative z-10 max-w-screen-xl mx-auto w-full px-5 md:px-8 pt-32 md:pt-40 pb-20 md:pb-28">
           <span className="inline-flex items-center gap-3 text-[0.7rem] tracking-[0.35em] uppercase text-sp-accent mb-7 md:mb-9">
-            <span>★</span> Live music, in plain sight
+            <span>★</span> Independent music coverage
           </span>
 
           <h1 className="font-display italic text-[clamp(3.5rem,11vw,9.5rem)] leading-[0.92] tracking-tight text-sp-text mb-7 md:mb-9 text-balance max-w-5xl">
-            Texas-born.<br />
-            <span className="text-sp-accent not-italic font-semibold">Music-driven.</span>
+            In the room.<br />
+            <span className="text-sp-accent not-italic font-semibold">On the record.</span>
           </h1>
 
           <p className="text-sp-soft text-lg md:text-2xl leading-relaxed font-light max-w-2xl mb-10 md:mb-12">
