@@ -62,7 +62,7 @@ export const showRecapArticles: Article[] = [
     category: 'Concert Coverage',
     venue: "Stubb's Bar-B-Q, Austin",
     coverIndex: 0,
-    heroImage: '/articles/the-kid-laroi-stubbs-austin-may-2026/15-laroi.png',
+    heroImage: '/articles/the-kid-laroi-stubbs-austin-may-2026/14-laroi.png',
     readTime: '3 min read',
     body: [
       "The Kid LAROI brought the BENEDIC Tour to Stubb's in Austin on May 30, with **WizTheMC** and **Tommy Richman** opening the bill.",

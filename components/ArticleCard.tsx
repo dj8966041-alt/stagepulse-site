@@ -19,7 +19,7 @@ function Cover({
   if (article.heroImage) {
     return (
       <div
-        className="relative overflow-hidden bg-sp-card"
+        className="relative overflow-hidden bg-sp-black flex items-center justify-center"
         style={{ aspectRatio }}
         role="img"
         aria-label={article.title}
@@ -29,7 +29,7 @@ function Cover({
           src={article.heroImage}
           alt={article.title}
           loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-[600ms] group-hover:scale-[1.03]"
+          className="block w-full h-full object-contain object-center transition-opacity duration-300 group-hover:opacity-95"
         />
       </div>
     )

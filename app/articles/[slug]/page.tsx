@@ -198,12 +198,14 @@ export default async function ArticlePage({ params }: { params: { slug: string }
       {/* Hero — full-bleed photo with title overlay */}
       <section className="relative w-full min-h-[80svh] md:min-h-[88svh] overflow-hidden bg-sp-black">
         {article.heroImage ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={article.heroImage}
-            alt={article.title}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
+          <div className="absolute inset-0 flex items-center justify-center bg-sp-black">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={article.heroImage}
+              alt={article.title}
+              className="max-w-full max-h-full w-auto h-auto object-contain object-center"
+            />
+          </div>
         ) : (
           <div className="absolute inset-0 bg-sp-black" aria-hidden="true" />
         )}
