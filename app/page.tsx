@@ -2,6 +2,8 @@ import Link from 'next/link'
 import PhotoPlaceholder from '@/components/PhotoPlaceholder'
 import ArticleCard from '@/components/ArticleCard'
 import NewsletterForm from '@/components/NewsletterForm'
+import TonightInTexas from '@/components/TonightInTexas'
+import StagePulseWeekly from '@/components/StagePulseWeekly'
 import { articles } from '@/lib/data'
 
 /**
@@ -71,7 +73,7 @@ export default function HomePage() {
           </h1>
 
           <p className="text-sp-soft text-lg md:text-2xl leading-relaxed font-light max-w-2xl mb-10 md:mb-12">
-            Live music, concerts, and culture from San Antonio and beyond.
+            Concerts, artists, and scene reporting. Texas is home base. The shows are everywhere.
           </p>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -103,14 +105,9 @@ export default function HomePage() {
         <section className="border-t border-sp-border-soft">
           <div className="max-w-screen-xl mx-auto px-5 md:px-8 py-20 md:py-28">
             <div className="mb-12 md:mb-16 flex items-end justify-between gap-6 flex-wrap">
-              <div>
-                <span className="block text-[0.65rem] tracking-[0.35em] uppercase text-sp-accent mb-4">
-                  ★ Featured coverage
-                </span>
-                <h2 className="font-display italic text-4xl md:text-6xl text-sp-text leading-[1.02] tracking-tight">
-                  The latest from<br className="hidden md:block" /> the pit.
-                </h2>
-              </div>
+              <h2 className="font-display italic text-4xl md:text-6xl text-sp-text leading-[1.02] tracking-tight">
+                Latest
+              </h2>
               <Link
                 href="/articles"
                 className="text-[0.7rem] tracking-[0.25em] uppercase text-sp-muted hover:text-sp-accent transition-colors whitespace-nowrap"
@@ -146,17 +143,20 @@ export default function HomePage() {
         </section>
       )}
 
+      {/* ─── TONIGHT IN TEXAS ───────────────────────────────────────────── */}
+      <TonightInTexas />
+
+      {/* ─── STAGEPULSE WEEKLY (Spotify) ────────────────────────────────── */}
+      <StagePulseWeekly />
+
       {/* ─── NEWSLETTER ─────────────────────────────────────────────────── */}
       <section className="border-t border-sp-border-soft">
         <div className="max-w-3xl mx-auto px-5 md:px-8 py-20 md:py-28 text-center">
-          <span className="block text-[0.65rem] tracking-[0.35em] uppercase text-sp-accent mb-5">
-            ★ The dispatch
-          </span>
           <h2 className="font-display italic text-4xl md:text-6xl text-sp-text leading-[1.05] tracking-tight mb-5 text-balance">
-            Stay in the loop.
+            Newsletter
           </h2>
           <p className="text-sp-soft text-base md:text-lg leading-relaxed font-light mb-10 max-w-xl mx-auto">
-            Concert coverage and culture straight to your inbox.
+            The week's coverage, sent on Sundays.
           </p>
           <NewsletterForm source="homepage" className="max-w-lg mx-auto text-left" />
         </div>

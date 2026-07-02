@@ -98,11 +98,8 @@ export default function CalendarFilter({ shows }: { shows: Show[] }) {
       {filteredShows.length === 0 ? (
         <div className="py-16 md:py-20 text-center max-w-md mx-auto border border-sp-border-soft bg-sp-card">
           <div className="px-6">
-            <span className="block text-[0.65rem] tracking-[0.35em] uppercase text-sp-accent mb-4">
-              ★ Quiet in {activeFilter.label}
-            </span>
             <p className="font-display italic text-2xl md:text-3xl text-sp-text mb-4 tracking-tight leading-tight">
-              Nothing on the calendar here yet.
+              No shows in {activeFilter.label} yet.
             </p>
             <p className="text-sp-soft text-sm md:text-base font-light leading-relaxed">
               Try a different city, or switch back to{' '}

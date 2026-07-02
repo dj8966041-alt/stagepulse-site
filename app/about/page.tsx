@@ -5,7 +5,7 @@ import PhotoPlaceholder from '@/components/PhotoPlaceholder'
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'StagePulse is a Texas-based independent publication covering live music, concerts, artist interviews, and fan culture across Texas and beyond. Founded in San Antonio in 2026.',
+    'StagePulse is an independent music publication based in San Antonio — covering live concerts, artists, and scenes across Texas and on tour everywhere else. Founded in 2026.',
 }
 
 export default function AboutPage() {
@@ -21,7 +21,7 @@ export default function AboutPage() {
             An independent music<br className="hidden md:block" /> publication, in plain&nbsp;sight.
           </h1>
           <p className="text-sp-soft text-lg md:text-xl max-w-2xl leading-relaxed font-light">
-            StagePulse covers concerts, artist interviews, and fan culture — based in San Antonio, reporting from wherever the show is.
+            StagePulse covers live music — concert reviews, artist features, scene reporting. Based in San Antonio. Filing from wherever the show is.
           </p>
         </div>
       </section>
@@ -51,7 +51,7 @@ export default function AboutPage() {
               {[
                 { term: 'Based in', def: 'San Antonio, TX' },
                 { term: 'Founded', def: '2026' },
-                { term: 'Coverage', def: 'Concerts, interviews, fan culture — across Texas and beyond.' },
+                { term: 'Coverage', def: 'Concerts, artist features, scene reporting — Texas-based, on tour everywhere else.' },
                 { term: 'Founder', def: 'Diego Jauregui' },
               ].map(({ term, def }) => (
                 <div key={term} className="pt-5 border-t border-sp-border-soft">
@@ -66,7 +66,7 @@ export default function AboutPage() {
           <div className="lg:col-span-8">
             <article className="space-y-7 text-sp-text-2">
               <p className="font-display text-xl md:text-2xl lg:text-[1.6rem] leading-[1.5] text-sp-text font-light text-balance">
-                StagePulse is a music and culture publication built in Texas, born out of a simple idea: the shows happening here are worth covering with the same care any city would expect.
+                StagePulse is an independent music publication. The premise is simple — cover live shows the way they actually deserve to be covered, without the editorial polish that makes most music writing read the same.
               </p>
 
               <p className="text-sp-soft text-base md:text-lg leading-[1.85] font-light">

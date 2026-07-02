@@ -21,6 +21,7 @@ function TikTokIcon() {
 const footerNav = [
   { label: 'Articles', href: '/articles' },
   { label: 'Calendar', href: '/calendar' },
+  { label: 'Prints', href: '/prints' },
   { label: 'About', href: '/about' },
   { label: 'Apply', href: '/apply' },
   { label: 'Contact', href: '/contact' },
@@ -47,7 +48,7 @@ export default function Footer() {
               <span aria-hidden="true" className="text-sp-accent text-[0.7rem]">★</span>
             </Link>
             <p className="text-sp-soft text-sm leading-relaxed mt-4 max-w-sm">
-              Independent music and culture publication covering live shows, artists, and fan culture across Texas and beyond.
+              Independent music publication. Concert reviews, artist features, scene reporting — based in Texas, on the road for the rest.
             </p>
             <p className="text-sp-muted text-xs mt-3 tracking-wide">
               San Antonio, TX — independent since 2026
@@ -119,7 +120,7 @@ export default function Footer() {
             © 2026 StagePulse — San Antonio, Texas
           </p>
           <p className="text-sp-muted text-xs italic font-display">
-            Live music. Real stories. No filter.
+            Live music writing without the press release.
           </p>
         </div>
       </div>

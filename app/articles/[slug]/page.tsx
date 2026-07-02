@@ -2,8 +2,14 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { articles, type Article } from '@/lib/data'
-import PhotoPlaceholder from '@/components/PhotoPlaceholder'
+import { slugifyTag } from '@/lib/tags'
+import { SITE_URL, SITE_NAME, SITE_AUTHOR } from '@/lib/site'
 import ArticleCard from '@/components/ArticleCard'
+import ArticlePhotoGallery from '@/components/ArticlePhotoGallery'
+import CityVenueGuide from '@/components/CityVenueGuide'
+import { parsePhotoMarker } from '@/lib/photo-markers'
+
+export const revalidate = 3600
 
 /**
  * Score-based related-article picker.
@@ -60,7 +66,37 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const article = articles.find((a) => a.slug === params.slug)
   if (!article) return {}
-  return { title: article.title, description: article.subtitle }
+
+  const url = `${SITE_URL}/articles/${article.slug}`
+
+  return {
+    title: article.title,
+    description: article.subtitle,
+    authors: [{ name: article.author }],
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'article',
+      url,
+      title: article.title,
+      description: article.subtitle,
+      siteName: SITE_NAME,
+      publishedTime: article.date,
+      authors: [article.author],
+      tags: article.tags,
+      // Next.js auto-detects opengraph-image.tsx colocated with this route
+      // — if the article has a real heroImage we surface that *in addition*
+      // so platforms that prefer photographic OG cards (Instagram, iMessage)
+      // get the real concert image instead of the generated card.
+      ...(article.heroImage
+        ? { images: [{ url: article.heroImage, width: 1600, height: 1067, alt: article.title }] }
+        : {}),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: article.subtitle,
+    },
+  }
 }
 
 function renderText(text: string) {
@@ -106,18 +142,6 @@ function renderNote(text: string) {
 
 type PhotoItem = { src: string; alt: string }
 
-function parsePhotos(marker: string): PhotoItem[] {
-  // Format: [PHOTOS:src1|alt1;;src2|alt2;;...]
-  const inner = marker.slice('[PHOTOS:'.length, -1)
-  return inner
-    .split(';;')
-    .map((entry) => {
-      const [src, alt] = entry.split('|')
-      return { src: (src ?? '').trim(), alt: (alt ?? '').trim() }
-    })
-    .filter((item) => item.src.length > 0)
-}
-
 function PhotoGrid({ items }: { items: PhotoItem[] }) {
   const cols =
     items.length >= 3
@@ -146,14 +170,60 @@ function PhotoGrid({ items }: { items: PhotoItem[] }) {
   )
 }
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
+export default async function ArticlePage({ params }: { params: { slug: string } }) {
   const article = articles.find((a) => a.slug === params.slug)
   if (!article) return notFound()
 
   const related = pickRelated(article, articles, 3)
 
+  // JSON-LD structured data — gives Google explicit facts about the article
+  // (author, publish date, headline, image, publisher) so it can render
+  // article rich results and feed the Top Stories carousel down the line.
+  const articleUrl = `${SITE_URL}/articles/${article.slug}`
+  const ogImageUrl = `${articleUrl}/opengraph-image`
+  const imageUrl = article.heroImage
+    ? `${SITE_URL}${article.heroImage}`
+    : ogImageUrl
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.subtitle,
+    image: [imageUrl],
+    datePublished: article.date,
+    dateModified: article.date,
+    author: [
+      {
+        '@type': 'Person',
+        name: article.author,
+        url: `${SITE_URL}/about`,
+      },
+    ],
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/opengraph-image`,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': articleUrl,
+    },
+    keywords: article.tags.join(', '),
+    articleSection: article.category,
+    creator: SITE_AUTHOR,
+  }
+
   return (
     <div className="bg-sp-black min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Hero — full-bleed photo with title overlay */}
       <section className="relative w-full min-h-[80svh] md:min-h-[88svh] overflow-hidden bg-sp-black">
         {article.heroImage ? (
@@ -164,12 +234,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
             className="absolute inset-0 w-full h-full object-cover"
           />
         ) : (
-          <PhotoPlaceholder
-            fill
-            index={article.coverIndex}
-            className="absolute inset-0 w-full h-full"
-            alt={article.title}
-          />
+          <div className="absolute inset-0 bg-sp-black" aria-hidden="true" />
         )}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -217,17 +282,37 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
       {/* Body */}
       <section className="max-w-screen-xl mx-auto px-5 md:px-8 py-16 md:py-24">
         {article.body.map((paragraph, i) => {
+          if (paragraph.startsWith('[CITY_VENUES:') && paragraph.endsWith(']')) {
+            const city = paragraph.slice('[CITY_VENUES:'.length, -1).trim()
+            return <CityVenueGuide key={i} city={city} />
+          }
+
+          if (paragraph.startsWith('[GALLERY:') && paragraph.endsWith(']')) {
+            return (
+              <div key={i} className="max-w-5xl mx-auto my-14 md:my-20">
+                <ArticlePhotoGallery items={parsePhotoMarker(paragraph)} />
+              </div>
+            )
+          }
+
           if (paragraph.startsWith('[PHOTOS:') && paragraph.endsWith(']')) {
-            return <PhotoGrid key={i} items={parsePhotos(paragraph)} />
+            return <PhotoGrid key={i} items={parsePhotoMarker(paragraph)} />
+          }
+
+          if (paragraph === '[CREDIT]') {
+            return (
+              <p
+                key={i}
+                className="max-w-prose text-sp-muted text-sm italic leading-relaxed mb-10 font-display"
+              >
+                Photos by Diego Jauregui
+              </p>
+            )
           }
 
           if (paragraph.startsWith('## ')) {
             return (
               <div key={i} className="max-w-prose mt-16 md:mt-20 mb-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="block w-6 h-px bg-sp-accent" />
-                  <span className="text-[0.65rem] tracking-[0.3em] uppercase text-sp-accent">Section</span>
-                </div>
                 <h2 className="font-display italic text-3xl md:text-[2.5rem] tracking-tight text-sp-text leading-[1.1]">
                   {paragraph.slice(3)}
                 </h2>
@@ -288,12 +373,13 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
             </span>
             <div className="flex flex-wrap gap-2">
               {article.tags.map((tag) => (
-                <span
+                <Link
                   key={tag}
+                  href={`/articles/tag/${slugifyTag(tag)}`}
                   className="text-[0.7rem] tracking-[0.18em] uppercase text-sp-soft border border-sp-border px-4 py-2 hover:border-sp-accent hover:text-sp-accent transition-colors"
                 >
                   {tag}
-                </span>
+                </Link>
               ))}
             </div>
           </div>
@@ -305,14 +391,9 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
         <section className="border-t border-sp-border-soft bg-sp-card">
           <div className="max-w-screen-xl mx-auto px-5 md:px-8 py-16 md:py-24">
             <div className="mb-10 md:mb-14 flex items-end justify-between flex-wrap gap-4">
-              <div>
-                <span className="block text-[0.65rem] tracking-[0.35em] uppercase text-sp-accent mb-3">
-                  ★ You might also like
-                </span>
-                <h2 className="font-display italic text-3xl md:text-5xl text-sp-text leading-none tracking-tight">
-                  More Coverage.
-                </h2>
-              </div>
+              <h2 className="font-display italic text-3xl md:text-5xl text-sp-text leading-none tracking-tight">
+                Related
+              </h2>
               <Link
                 href="/articles"
                 className="text-[0.7rem] tracking-[0.25em] uppercase text-sp-muted hover:text-sp-accent transition-colors"

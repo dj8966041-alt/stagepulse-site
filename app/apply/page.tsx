@@ -123,7 +123,7 @@ export default function ApplyPage() {
               </div>
               <div className="space-y-5 text-sp-soft text-base md:text-lg leading-relaxed font-light">
                 <p>
-                  StagePulse is a music and culture publication. We cover live concerts, artist features and interviews, festival coverage, scene reporting, and fan culture — the people, venues, and moments that make live music matter.
+                  StagePulse is an independent music publication. The work is concert reviews, artist features and interviews, festival coverage, and scene reporting — the rooms, the audiences, and the artists who keep showing up to do the work.
                 </p>
                 <p>
                   Our editorial home base is San Antonio, and our core beat is Texas — Austin, Houston, Dallas, San Antonio, and everything in between. We follow stories when they leave the state, especially when artists we cover take their tours national.
@@ -187,7 +187,7 @@ export default function ApplyPage() {
                   {[
                     { term: 'Founded', def: '2026, San Antonio' },
                     { term: 'Coverage', def: 'Live music & culture across Texas and beyond' },
-                    { term: 'Beat', def: 'Concerts, artist features, fan culture' },
+                    { term: 'Beat', def: 'Concerts, artist features, scene reporting' },
                     { term: 'Advertising', def: 'None — fully independent' },
                     { term: 'Photography', def: 'Available light, no flash' },
                     { term: 'Reviews', def: 'Honest, unembargoed' },

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import PhotoPlaceholder from './PhotoPlaceholder'
+import ArticleCoverFallback from './ArticleCoverFallback'
 import type { Article } from '@/lib/data'
 
 type Props = {
@@ -7,7 +7,15 @@ type Props = {
   variant?: 'default' | 'large' | 'horizontal' | 'feature'
 }
 
-function Cover({ article, aspectRatio }: { article: Article; aspectRatio: string }) {
+function Cover({
+  article,
+  aspectRatio,
+  showTitleOnFallback = false,
+}: {
+  article: Article
+  aspectRatio: string
+  showTitleOnFallback?: boolean
+}) {
   if (article.heroImage) {
     return (
       <div
@@ -27,11 +35,12 @@ function Cover({ article, aspectRatio }: { article: Article; aspectRatio: string
     )
   }
   return (
-    <PhotoPlaceholder
-      index={article.coverIndex}
-      alt={article.title}
+    <ArticleCoverFallback
+      title={article.title}
+      category={article.category}
       aspectRatio={aspectRatio}
-      className="transition-transform duration-[600ms] group-hover:scale-[1.03]"
+      showTitle={showTitleOnFallback}
+      className="transition-transform duration-[600ms] group-hover:scale-[1.01]"
     />
   )
 }
@@ -59,7 +68,8 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 }
 
 export default function ArticleCard({ article, variant = 'default' }: Props) {
-  // Feature — used for the marquee homepage hero card
+  const hasPhoto = Boolean(article.heroImage)
+
   if (variant === 'feature') {
     return (
       <Link href={`/articles/${article.slug}`} className="group block">
@@ -87,20 +97,38 @@ export default function ArticleCard({ article, variant = 'default' }: Props) {
   if (variant === 'large') {
     return (
       <Link href={`/articles/${article.slug}`} className="group block">
-        <div className="relative overflow-hidden">
-          <Cover article={article} aspectRatio="16/9" />
-          <div className="absolute inset-0 bg-gradient-to-t from-sp-black via-sp-black/40 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
-            <div className="mb-4">
-              <Eyebrow>{article.category}</Eyebrow>
-            </div>
-            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl tracking-tight text-sp-text leading-[1.05] mb-3 group-hover:text-sp-accent transition-colors duration-200 text-balance max-w-4xl">
-              {article.title}
-            </h2>
-            <p className="text-sp-soft text-sm md:text-base leading-relaxed hidden md:block line-clamp-2 mb-5 max-w-2xl font-light">
+        <div className="md:relative md:overflow-hidden">
+          <div className="overflow-hidden">
+            <Cover article={article} aspectRatio="16/9" showTitleOnFallback={!hasPhoto} />
+          </div>
+          {hasPhoto && (
+            <div className="md:absolute md:inset-0 md:bg-gradient-to-t md:from-sp-black md:via-sp-black/40 md:to-transparent" />
+          )}
+          <div
+            className={
+              hasPhoto
+                ? 'pt-6 md:absolute md:bottom-0 md:left-0 md:right-0 md:p-10 p-0'
+                : 'pt-6 md:pt-8'
+            }
+          >
+            {hasPhoto && (
+              <>
+                <div className="mb-4">
+                  <Eyebrow>{article.category}</Eyebrow>
+                </div>
+                <h2 className="font-display text-3xl md:text-5xl lg:text-6xl tracking-tight text-sp-text leading-[1.08] md:leading-[1.05] mb-3 group-hover:text-sp-accent transition-colors duration-200 text-balance max-w-4xl">
+                  {article.title}
+                </h2>
+              </>
+            )}
+            <p
+              className={`text-sp-soft text-sm md:text-base leading-relaxed line-clamp-2 mb-5 max-w-2xl font-light ${
+                hasPhoto ? 'hidden md:block' : ''
+              }`}
+            >
               {article.subtitle}
             </p>
-            <Meta article={article} light />
+            <Meta article={article} light={hasPhoto} />
           </div>
         </div>
       </Link>
@@ -126,7 +154,6 @@ export default function ArticleCard({ article, variant = 'default' }: Props) {
     )
   }
 
-  // default — editorial card with large cover above title
   return (
     <Link href={`/articles/${article.slug}`} className="group block">
       <div className="overflow-hidden mb-5">

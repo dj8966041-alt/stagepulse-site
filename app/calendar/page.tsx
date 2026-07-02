@@ -37,14 +37,11 @@ export default async function CalendarPage() {
       {/* Header */}
       <section className="pt-36 md:pt-44 pb-12 md:pb-16 border-b border-sp-border-soft">
         <div className="max-w-screen-xl mx-auto px-5 md:px-8">
-          <span className="inline-flex items-center gap-3 text-[0.7rem] tracking-[0.35em] uppercase text-sp-accent mb-6">
-            <span>★</span> Live this season
-          </span>
           <h1 className="font-display italic text-5xl md:text-7xl lg:text-[6rem] tracking-tight text-sp-text leading-[0.95] mb-6 max-w-3xl text-balance">
             Concert calendar.
           </h1>
           <p className="text-sp-soft text-base md:text-xl max-w-2xl leading-relaxed font-light">
-            Texas tour dates from the artists we cover, refreshed every hour. Filter by city, or browse the full slate — then tap a ticket button to jump to the box office.
+            Upcoming Texas shows from the artists we cover. Filter by city or browse the full list.
           </p>
         </div>
       </section>
@@ -83,7 +80,7 @@ export default async function CalendarPage() {
         <section className="border-b border-sp-border-soft bg-sp-card">
           <div className="max-w-screen-xl mx-auto px-5 md:px-8 py-12 md:py-16">
             <span className="block text-[0.65rem] tracking-[0.35em] uppercase text-sp-accent mb-5">
-              ★ Featured show
+              Featured
             </span>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-9">
@@ -122,14 +119,11 @@ export default async function CalendarPage() {
       <section className="max-w-screen-xl mx-auto px-5 md:px-8 py-14 md:py-20">
         {upcoming.length === 0 ? (
           <div className="py-12 md:py-20 text-center max-w-xl mx-auto">
-            <span className="block text-[0.65rem] tracking-[0.35em] uppercase text-sp-accent mb-6">
-              ★ Between announcements
-            </span>
             <h2 className="font-display italic text-3xl md:text-5xl text-sp-text leading-[1.1] tracking-tight mb-6 text-balance">
-              No confirmed shows on the calendar right now.
+              No shows on the calendar right now.
             </h2>
             <p className="text-sp-soft text-base md:text-lg font-light leading-relaxed mb-8">
-              We only post shows we can confirm — date, venue, ticket link. Follow us on Instagram for early word as new tours announce.
+              We only list shows we can confirm. Follow us on Instagram for updates as new tours announce.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <a
@@ -176,11 +170,8 @@ export default async function CalendarPage() {
         <section className="border-t border-sp-border-soft bg-sp-card">
           <div className="max-w-screen-xl mx-auto px-5 md:px-8 py-14 md:py-18">
             <div className="mb-8">
-              <span className="block text-[0.65rem] tracking-[0.35em] uppercase text-sp-accent mb-3">
-                ★ Recently passed
-              </span>
               <h2 className="font-display italic text-2xl md:text-4xl text-sp-text leading-none tracking-tight">
-                Shows we just covered.
+                Past shows
               </h2>
             </div>
             <ul className="space-y-0">
@@ -204,14 +195,11 @@ export default async function CalendarPage() {
       <section className="border-t border-sp-border-soft">
         <div className="max-w-screen-xl mx-auto px-5 md:px-8 py-14 md:py-20">
           <div className="max-w-3xl">
-            <span className="block text-[0.65rem] tracking-[0.35em] uppercase text-sp-accent mb-4">
-              ★ Got a show?
-            </span>
             <h2 className="font-display italic text-3xl md:text-5xl text-sp-text leading-[1.05] tracking-tight mb-5 text-balance">
-              Tell us what we should be at.
+              Submit a show
             </h2>
             <p className="text-sp-soft text-base md:text-lg leading-relaxed font-light mb-7 max-w-2xl">
-              Promoters, publicists, and fans: if there's a Texas show we should be covering, send the details. We respond to tips within 48 hours.
+              Promoters, publicists, and fans — send us a Texas show we should cover.
             </p>
             <Link
               href="/contact"
