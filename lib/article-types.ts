@@ -10,6 +10,8 @@ export type Article = {
   venue?: string
   coverIndex: number
   heroImage?: string
+  /** Portrait covers use a blurred fill so they match landscape cards without cropping. */
+  heroImageFit?: 'landscape' | 'portrait'
   readTime: string
   body: string[]
   tags: string[]

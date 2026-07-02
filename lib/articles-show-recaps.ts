@@ -42,6 +42,7 @@ export const showRecapArticles: Article[] = [
     venue: 'Moody Amphitheater, Austin',
     coverIndex: 2,
     heroImage: '/articles/khalid-moody-amphitheater-austin-june-2026/02-teal-point.png',
+    heroImageFit: 'portrait',
     readTime: '2 min read',
     body: [
       'On June 19, pop singer Khalid took to the Moody Amphitheater stage in Austin.',
@@ -63,6 +64,7 @@ export const showRecapArticles: Article[] = [
     venue: "Stubb's Bar-B-Q, Austin",
     coverIndex: 0,
     heroImage: '/articles/the-kid-laroi-stubbs-austin-may-2026/14-laroi.png',
+    heroImageFit: 'portrait',
     readTime: '3 min read',
     body: [
       "The Kid LAROI brought the BENEDIC Tour to Stubb's in Austin on May 30, with **WizTheMC** and **Tommy Richman** opening the bill.",

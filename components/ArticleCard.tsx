@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import ArticleCoverFallback from './ArticleCoverFallback'
+import ArticleCoverImage from './ArticleCoverImage'
 import type { Article } from '@/lib/data'
 
 type Props = {
@@ -19,17 +20,16 @@ function Cover({
   if (article.heroImage) {
     return (
       <div
-        className="relative overflow-hidden bg-sp-black flex items-center justify-center"
+        className="relative overflow-hidden transition-transform duration-[600ms] group-hover:scale-[1.02]"
         style={{ aspectRatio }}
         role="img"
         aria-label={article.title}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <ArticleCoverImage
           src={article.heroImage}
           alt={article.title}
-          loading="lazy"
-          className="block w-full h-full object-contain object-center transition-opacity duration-300 group-hover:opacity-95"
+          fit={article.heroImageFit ?? 'landscape'}
+          className="absolute inset-0 w-full h-full"
         />
       </div>
     )
