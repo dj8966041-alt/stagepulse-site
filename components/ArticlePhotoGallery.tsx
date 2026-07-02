@@ -59,7 +59,7 @@ export default function ArticlePhotoGallery({ items }: Props) {
   if (count === 0) {
     return (
       <figure className="w-full">
-        <div className="relative aspect-[16/10] bg-sp-card border border-sp-border flex items-center justify-center">
+        <div className="relative min-h-[240px] bg-sp-card border border-sp-border flex items-center justify-center">
           <p className="text-sp-muted text-sm tracking-[0.15em] uppercase">
             Photos coming soon
           </p>
@@ -70,28 +70,24 @@ export default function ArticlePhotoGallery({ items }: Props) {
 
   return (
     <figure className="w-full">
-      <div className="relative aspect-[16/10] bg-sp-card border border-sp-border overflow-hidden group">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          key={current.src}
-          src={current.src}
-          alt={current.alt || 'Concert photo'}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              'linear-gradient(to top, rgba(10,10,10,0.75) 0%, transparent 35%)',
-          }}
-        />
+      <div className="relative border border-sp-border bg-sp-black group">
+        <div className="flex items-center justify-center min-h-[280px] max-h-[min(82svh,880px)] px-2 py-3 md:px-6 md:py-5">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            key={current.src}
+            src={current.src}
+            alt={current.alt || 'Concert photo'}
+            className="max-w-full max-h-[min(78svh,820px)] w-auto h-auto object-contain"
+            decoding="async"
+          />
+        </div>
 
         {count > 1 && (
           <>
             <button
               type="button"
               onClick={() => go(-1)}
-              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-sp-black/70 border border-sp-border text-sp-text hover:border-sp-accent hover:text-sp-accent transition-colors opacity-90 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-sp-black/80 border border-sp-border text-sp-text hover:border-sp-accent hover:text-sp-accent transition-colors opacity-90 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"
               aria-label="Previous photo"
             >
               <Chevron direction="left" />
@@ -99,31 +95,31 @@ export default function ArticlePhotoGallery({ items }: Props) {
             <button
               type="button"
               onClick={() => go(1)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-sp-black/70 border border-sp-border text-sp-text hover:border-sp-accent hover:text-sp-accent transition-colors opacity-90 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-sp-black/80 border border-sp-border text-sp-text hover:border-sp-accent hover:text-sp-accent transition-colors opacity-90 md:opacity-0 md:group-hover:opacity-100 md:group-focus-within:opacity-100"
               aria-label="Next photo"
             >
               <Chevron direction="right" />
             </button>
           </>
         )}
-
-        {current.alt && (
-          <figcaption className="absolute bottom-0 left-0 right-0 z-10 px-4 py-3 md:px-5 md:py-4">
-            <p className="text-sp-text-2 text-sm md:text-base font-light leading-snug max-w-3xl">
-              {current.alt}
-            </p>
-          </figcaption>
-        )}
       </div>
 
+      {current.alt && (
+        <figcaption className="mt-3 px-1">
+          <p className="text-sp-soft text-sm md:text-base font-light leading-relaxed max-w-3xl">
+            {current.alt}
+          </p>
+        </figcaption>
+      )}
+
       {count > 1 && (
-        <div className="mt-3 flex gap-2 overflow-x-auto pb-1 scrollbar-thin">
+        <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
           {items.map((item, i) => (
             <button
               key={`${item.src}-${i}`}
               type="button"
               onClick={() => setIndex(i)}
-              className={`relative shrink-0 w-[4.5rem] h-[3.25rem] md:w-20 md:h-14 overflow-hidden border transition-colors ${
+              className={`relative shrink-0 w-14 h-[4.25rem] md:w-16 md:h-20 overflow-hidden border bg-sp-black transition-colors ${
                 i === index
                   ? 'border-sp-accent ring-1 ring-sp-accent'
                   : 'border-sp-border opacity-70 hover:opacity-100 hover:border-sp-soft'
@@ -135,7 +131,7 @@ export default function ArticlePhotoGallery({ items }: Props) {
               <img
                 src={item.src}
                 alt=""
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-contain p-0.5"
               />
             </button>
           ))}
