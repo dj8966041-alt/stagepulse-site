@@ -5,6 +5,7 @@ import { articles, type Article } from '@/lib/data'
 import { slugifyTag } from '@/lib/tags'
 import { SITE_URL, SITE_NAME, SITE_AUTHOR } from '@/lib/site'
 import ArticleCard from '@/components/ArticleCard'
+import ArticleInlinePhotos from '@/components/ArticleInlinePhotos'
 import ArticlePhotoGallery from '@/components/ArticlePhotoGallery'
 import CityVenueGuide from '@/components/CityVenueGuide'
 import { parsePhotoMarker } from '@/lib/photo-markers'
@@ -140,36 +141,6 @@ function renderNote(text: string) {
   )
 }
 
-type PhotoItem = { src: string; alt: string }
-
-function PhotoGrid({ items }: { items: PhotoItem[] }) {
-  const cols =
-    items.length >= 3
-      ? 'sm:grid-cols-3'
-      : items.length === 2
-      ? 'sm:grid-cols-2'
-      : 'sm:grid-cols-1'
-
-  return (
-    <figure className={`my-14 md:my-20 grid grid-cols-1 ${cols} gap-3 sm:gap-4`}>
-      {items.map((item, idx) => (
-        <div
-          key={idx}
-          className="relative overflow-hidden bg-sp-card aspect-[4/5]"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={item.src}
-            alt={item.alt}
-            loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        </div>
-      ))}
-    </figure>
-  )
-}
-
 export default async function ArticlePage({ params }: { params: { slug: string } }) {
   const article = articles.find((a) => a.slug === params.slug)
   if (!article) return notFound()
@@ -296,7 +267,9 @@ export default async function ArticlePage({ params }: { params: { slug: string }
           }
 
           if (paragraph.startsWith('[PHOTOS:') && paragraph.endsWith(']')) {
-            return <PhotoGrid key={i} items={parsePhotoMarker(paragraph)} />
+            return (
+              <ArticleInlinePhotos key={i} items={parsePhotoMarker(paragraph)} />
+            )
           }
 
           if (paragraph === '[CREDIT]') {
