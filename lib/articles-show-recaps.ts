@@ -14,7 +14,7 @@ export const showRecapArticles: Article[] = [
     category: 'Concert Coverage',
     venue: 'Frost Bank Center, San Antonio',
     coverIndex: 1,
-    heroImage: '/articles/don-toliver-frost-bank-center-june-2026/02-crowd.png',
+    heroImage: '/articles/don-toliver-frost-bank-center-june-2026/cover.png',
     readTime: '2 min read',
     body: [
       'Don Toliver brought the Hardstone Psycho Tour to the Frost Bank Center in San Antonio on June 15.',
